@@ -1,0 +1,158 @@
+"使用中文帮助文档
+set helplang=cn
+
+"启动最大化
+au GUIEnter * simalt ~x
+
+colorscheme monokai
+
+set hlsearch
+set ts=4
+set expandtab
+set autoindent
+"set guifont=consolas:h11
+set guifont=Bitstream_Vera_Sans_Mono:h11
+set guifontwide=Yahei_Mono:h11
+set guioptions-=m
+set guioptions-=T
+
+"Set mapleader 
+let mapleader = "," 
+let g:mapleader = ","
+
+"显示行号 
+set nu
+
+"打开语法高亮 
+syntax on
+
+set softtabstop=4 
+set shiftwidth=4
+
+"关闭自动备份 
+set nobackup
+
+"自动缩进设置 
+set cindent 
+set smartindent 
+set incsearch 
+set autoindent
+
+"Show matching bracets 
+set showmatch
+
+"Get out of VI's compatible mode 
+set nocompatible
+
+"Have the mouse enabled all the time 
+set mouse=a
+
+"Set to auto read when a file is changed from the outside 
+set autoread
+
+"Enable filetype plugin 
+filetype plugin on 
+filetype indent on
+
+"设置配色方案为torte 
+"colo torte
+
+"设置支持的文件编码类项，目前设置为utf-8和gbk两种类型 
+set fileencodings=utf-8,chinese
+
+"设置搜索结果高亮显示 
+"set hlsearch
+
+"设置记录的历史操作列表 
+set history=50
+
+"设置折叠 
+"set foldcolumn=2 
+"set foldmethod=indent 
+"set foldlevel=3
+
+"设置程序的运行和调试的快捷键F5和Ctrl-F5 
+"map <F5> :call CompileRun()<CR> 
+"map <C-F5> :call Debug()<CR>
+
+"使用<leader>e打开当前文件同目录中的文件 
+if has("unix") 
+    map ,e :e <C-R>=expand("%:p:h") . "/" <CR> 
+else 
+    map ,e :e <C-R>=expand("%:p:h") . "/" <CR> 
+endif
+
+""定义CompileRun函数，用来调用进行编译和运行 
+"func CompileRun() 
+"    exec "w" 
+"    "C程序 
+"    if &filetype == 'c' 
+"        exec "!gcc % -g -o %<" 
+"        exec "!%<" 
+"    endif 
+"endfunc 
+""结束定义CompileRun
+"
+""定义Debug函数，用来调试程序 
+"func Debug() 
+"    exec "w" 
+"    "C程序 
+"    if &filetype == 'c' 
+"        exec "!gcc % -g -o %<" 
+"        exec "!gdb %<" 
+"    endif 
+"endfunc 
+"结束定义Debug
+
+"======================================================================
+"Import external source
+"======================================================================
+"source ~/.vim/syntax/viva.vim 
+source ~/.vim/syntax/verilog_systemverilog.vim
+"source ~/.vim/syntax/automatic.vim
+
+"======================================================================
+"Function to create file header automatically
+"======================================================================
+source $VIMRUNTIME/vimrc_taglist.vim
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascrīpt set omnifunc=javascrīptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
+autocmd FileType verilog set omnifunc=verilogcomplete#Complete
+
+au BufNewFile,BufRead *.log setf klog
+au BufNewFile,BufRead *.gen setf verilog
+map <C-n> 3<C-e>
+map <C-p> 3<C-y>
+
+let g:neocomplcache_enable_at_startup = 1
+
+let g:easy_align_delimiters = {
+\ '>': { 'pattern': '>>\|=>\|>' },
+\ '/': {
+\     'pattern':         '//\+\|/\*\|\*/',
+\     'delimiter_align': 'l',
+\     'ignore_groups':   ['!Comment'] },
+\ ']': {
+\     'pattern':       '[[\]]',
+\     'left_margin':   0,
+\     'right_margin':  0,
+\     'stick_to_left': 0
+\   },
+\ ')': {
+\     'pattern':       '[()]',
+\     'left_margin':   0,
+\     'right_margin':  0,
+\     'stick_to_left': 0
+\   },
+\ 'd': {
+\     'pattern':      ' \(\S\+\s*[;=]\)\@=',
+\     'left_margin':  0,
+\     'right_margin': 0
+\   }
+\ }
+

@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Directory\shell\MinGW]
+@="MSYS"
+
+[HKEY_CLASSES_ROOT\Directory\shell\MinGW\command]
+@="cmd.exe /k cd /d \"%1\" & set MHERE_INVOKING=1 & C:\\MinGW\\msys\\1.0\\msys2.bat --mintty"
