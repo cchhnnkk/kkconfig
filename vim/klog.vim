@@ -20,7 +20,8 @@ syn match   Comment      "^\t.*"
 
 syn match   zhead        "wr.*"
 syn match   zhead        "rd.*"
-syn match   zhead        "ctrl.*"
+syn match   zhead        "ctrl_core.*"
+syn match   cScope       "ctrl_bm.*"
 
 
 " 有时间研究下
@@ -32,7 +33,11 @@ syn match   zhead        "ctrl.*"
 " syn match ztxt1 "`1"
 " syn match day67 "...\/\(六\|日\).*"
 " hi zhead guifg=green gui=bold
-hi zhead guifg=lightgreen
+hi zhead              guifg=lightgreen
+hi zgreen             guifg=green
+hi cScope             guifg=#3EFFE2
+hi sColon             guifg=#60d080
+hi cFunction          gui=NONE  guifg=#B5A1FF
 " hi link zhead2 zhead
 " hi ztxt1 guifg=red guibg=red
 " hi day67 guifg=lightblue
