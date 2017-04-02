@@ -1,0 +1,179 @@
+" 项目: gvim 配置文件
+" 作者: yonsan
+" 安装: sudo apt-get install vim-gtk
+" 用法: 将本文件(.vimrc)拷贝到$HOME/
+
+" 使用 murphy 调色板
+colo murphy
+" 设置用于GUI图形用户界面的字体列表。
+" set guifont=Consolas\ 12
+" set guifont=Bitstream_Vera_Sans_Mono\ 10.5
+" set guifontwide=Yahei_Mono\ 10.5
+set guifont=Bitstream\ Vera\ Sans\ Mono\ 11
+set guifontwide=Yahei\ Mono\ 10.5
+
+set guioptions-=m
+set guioptions-=T
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
+
+filetype plugin on
+
+"
+set nocompatible
+" 设定文件浏览器目录为当前目录
+set bsdir=buffer
+
+" 自动切换目录
+set autochdir
+" 设置编码
+set enc=utf-8
+" 设置文件编码
+set fenc=utf-8
+" 设置文件编码检测类型及支持格式
+set fencs=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+" 指定菜单语言
+set langmenu=zh_CN.UTF-8
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+" 设置开启语法高亮
+syntax on
+" 设置语法高亮度
+"set syn=cpp
+"显示行号
+set nu!
+" 查找结果高亮度显示
+set hlsearch
+set incsearch
+" tab宽度
+set tabstop=4
+set expandtab
+set autoindent
+set softtabstop=4 
+set shiftwidth=4
+
+" C/C++注释
+set comments=://
+" 修正自动C式样注释功能 <2005/07/16>
+
+set comments=s1:/*,mb:*,ex0:/
+
+" 增强检索功能
+set tags=./tags,./../tags,./../../tags,./../../../tags;
+
+set autoread
+
+" 保存文件格式
+set fileformats=unix,dos
+" 键盘操作
+map <Up> gk
+map <Down> gj
+" 命令行高度
+set cmdheight=1
+" 中文帮助
+if version > 603
+	set helplang=cn
+endi
+
+" colorscheme default
+" colorscheme elflord
+" colorscheme molokai
+colorscheme koehler
+" colorscheme ron
+" colorscheme slate
+set t_Co=256
+" let g:molokai_original = 1
+" let g:rehash = 1
+
+let g:neocomplcache_enable_at_startup = 1
+
+"======================================================================
+"Function to create file header automatically
+"======================================================================
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascrīpt set omnifunc=javascrīptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
+autocmd FileType verilog set omnifunc=verilogcomplete#Complete
+
+au BufNewFile,BufRead *.log setf klog
+au BufNewFile,BufRead *.gen setf verilog
+map <C-n> 3<C-e>
+map <C-p> 3<C-y>
+
+
+let g:easy_align_delimiters = {
+\ '>': { 'pattern': '>>\|=>\|>' },
+\ '/': {
+\     'pattern':         '//\+\|/\*\|\*/',
+\     'delimiter_align': 'l',
+\     'ignore_groups':   ['!Comment'] },
+\ ']': {
+\     'pattern':       '[[\]]',
+\     'left_margin':   0,
+\     'right_margin':  0,
+\     'stick_to_left': 0
+\   },
+\ ')': {
+\     'pattern':       '[()]',
+\     'left_margin':   0,
+\     'right_margin':  0,
+\     'stick_to_left': 0
+\   },
+\ 'd': {
+\     'pattern':      ' \(\S\+\s*[;=]\)\@=',
+\     'left_margin':  0,
+\     'right_margin': 0
+\   }
+\ }
+
+let g:pep8_map='<leader>8'
+autocmd FileType python setlocal foldmethod=indent
+"默认展开所有代码
+set foldlevel=99
+
+" let g:miniBufExplMapWindowNavVim = 1 
+" let g:miniBufExplMapWindowNavArrows = 1 
+" let g:miniBufExplMapCTabSwitchBufs = 1 
+" let g:miniBufExplModSelTarget = 1
+
+" TagList Plugin Configuration
+" source $VIMRUNTIME/vimrc_taglist.vim
+" let Tlist_Ctags_Cmd="D:/programfiles/vim74/ctags.exe"
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Close_On_Select = 1
+let Tlist_Use_Right_Window = 0
+let Tlist_File_Fold_Auto_Close = 1
+let Tlist_WinWidth = 50
+map <F7> :TlistToggle<CR>
+
+let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
+
+function Do_CsTag()
+    if(executable("cscope") && has("cscope") )
+        if(has('win32'))
+            silent! execute "!dir /b *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
+        else
+            silent! execute "!find . -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.m" -o -name "*.mm" -o -name "*.java" -o -name "*.py" > cscope.files"
+        endif
+        silent! execute "!cscope -b"
+        if filereadable("cscope.out")
+            execute "cs add cscope.out"
+        endif
+    endif
+endf
+
+" nmap <F8> :cs find s <C-R>=expand("<cword>")<CR><CR>	
+" nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
+" nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
+" nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
+" nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
+" nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
+" nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+" nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
+
